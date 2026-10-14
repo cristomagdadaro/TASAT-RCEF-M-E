@@ -15,5 +15,16 @@
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1"
+    },
+    "dependencies": {
+        "@capacitor/android": "^8.5.3",
+        "@capacitor/cli": "^8.5.3",
+        "@capacitor/core": "^8.5.3",
+        "@capacitor/preferences": "^8.0.1",
+        "@vitejs/plugin-vue": "^6.0.10",
+        "pinia": "^4.0.3",
+        "sql.js": "^1.14.2",
+        "vue": "^3.5.44",
+        "vue-router": "^5.4.0"
     }
 }
