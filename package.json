@@ -3,9 +3,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "build:mobile": "vite build --config vite.config.mobile.js && node node_modules/@capacitor/cli/bin/capacitor sync android",
+        "dev": "node node_modules/vite/bin/vite.js",
+        "build": "node node_modules/vite/bin/vite.js build",
+        "build:mobile": "node node_modules/vite/bin/vite.js build --config vite.config.mobile.js && node node_modules/@capacitor/cli/bin/capacitor sync android",
         "cap:sync": "node node_modules/@capacitor/cli/bin/capacitor sync android",
         "cap:open": "node node_modules/@capacitor/cli/bin/capacitor open android"
     },
