@@ -15,20 +15,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $enum1 = User::create([
-            'name' => 'Juan Dela Cruz',
-            'email' => 'enumerator1@rcef.gov.ph',
-            'username' => 'enumerator1',
-            'password' => bcrypt('Password123!'),
-            'role' => 'enumerator',
-        ]);
+        User::firstOrCreate(
+            ['username' => 'enumerator1'],
+            [
+                'name' => 'Juan Dela Cruz',
+                'email' => 'enumerator1@rcef.gov.ph',
+                'password' => bcrypt('Password123!'),
+                'role' => 'enumerator',
+            ]
+        );
 
-        $enum2 = User::create([
-            'name' => 'Maria Santos',
-            'email' => 'enumerator2@rcef.gov.ph',
-            'username' => 'enumerator2',
-            'password' => bcrypt('Password123!'),
-            'role' => 'enumerator',
-        ]);
+        User::firstOrCreate(
+            ['username' => 'enumerator2'],
+            [
+                'name' => 'Maria Santos',
+                'email' => 'enumerator2@rcef.gov.ph',
+                'password' => bcrypt('Password123!'),
+                'role' => 'enumerator',
+            ]
+        );
+
+        $this->call(FarmerSurveyInterviewSeeder::class);
     }
 }

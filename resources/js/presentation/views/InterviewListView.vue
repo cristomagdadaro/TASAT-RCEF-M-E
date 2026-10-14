@@ -10,8 +10,7 @@
                     Saved Survey Interviews
                 </h2>
                 <p class="text-xs text-neutral-600">
-                    SQLite Local Storage Database &bull; Records survive app
-                    restarts
+                    SQLite Local Storage Database
                 </p>
             </div>
 
