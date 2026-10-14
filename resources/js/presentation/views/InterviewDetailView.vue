@@ -78,27 +78,27 @@
                 <dl class="mt-4 divide-y divide-neutral-200 text-sm">
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B1Q1] Farmer's Full Name
+                            Q1. Farmer's Full Name
                         </dt>
                         <dd class="font-bold text-black">
                             {{ interview.farmerInfo.b1q1FarmerName }}
                         </dd>
                     </div>
                     <div class="py-2.5 flex justify-between">
-                        <dt class="font-medium text-neutral-600">[B1Q2] Sex</dt>
+                        <dt class="font-medium text-neutral-600">Q2. Sex</dt>
                         <dd class="font-bold text-black">
                             {{ interview.farmerInfo.b1q2Sex }}
                         </dd>
                     </div>
                     <div class="py-2.5 flex justify-between">
-                        <dt class="font-medium text-neutral-600">[B1Q3] Age</dt>
+                        <dt class="font-medium text-neutral-600">Q3. Age</dt>
                         <dd class="font-bold text-black">
                             {{ interview.farmerInfo.b1q3Age }}
                         </dd>
                     </div>
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B1Q4] Province
+                            Q4. Province
                         </dt>
                         <dd class="font-bold text-black">
                             {{ interview.farmerInfo.b1q4Province }}
@@ -106,7 +106,7 @@
                     </div>
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B1Q5] Municipality/City
+                            Q5. Municipality/City
                         </dt>
                         <dd class="font-bold text-black">
                             {{ interview.farmerInfo.b1q5MunicipalityCity }}
@@ -114,7 +114,7 @@
                     </div>
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B1Q6] Engaged in Rice Farming
+                            Q6. Engaged in Rice Farming
                         </dt>
                         <dd class="font-bold text-black">
                             {{ interview.farmerInfo.b1q6EngagedInRiceFarming }}
@@ -143,7 +143,7 @@
                 <dl class="mt-4 divide-y divide-neutral-200 text-sm">
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B2Q1] Total Rice Farm Area
+                            Q1. Total Rice Farm Area
                         </dt>
                         <dd class="font-bold text-black">
                             {{ interview.riceFarmingInfo.b2q1TotalFarmArea }}
@@ -152,7 +152,7 @@
                     </div>
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B2Q2] Primary Rice Ecosystem
+                            Q2. Primary Rice Ecosystem
                         </dt>
                         <dd class="font-bold text-black">
                             {{ interview.riceFarmingInfo.b2q2PrimaryEcosystem }}
@@ -160,7 +160,7 @@
                     </div>
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B2Q3] Rice Establishment Method
+                            Q3. Rice Establishment Method
                         </dt>
                         <dd class="font-bold text-black">
                             {{
@@ -171,7 +171,7 @@
                     </div>
                     <div class="py-2.5 flex justify-between">
                         <dt class="font-medium text-neutral-600">
-                            [B2Q4] Uses Certified Rice Seeds
+                            Q4. Uses Certified Rice Seeds
                         </dt>
                         <dd class="font-bold text-black">
                             {{
@@ -184,7 +184,7 @@
                         class="py-2.5 flex justify-between"
                     >
                         <dt class="font-medium text-neutral-600">
-                            [B2Q5] Primary Seed Variety
+                            Q5. Primary Seed Variety
                         </dt>
                         <dd class="font-bold text-black">
                             {{
@@ -195,7 +195,7 @@
                     </div>
                     <div class="py-2.5">
                         <dt class="font-medium text-neutral-600">
-                            [B2Q6] Main Production Challenges
+                            Q6. Main Production Challenges
                         </dt>
                         <dd class="mt-1">
                             <ul class="list-disc pl-5 font-semibold text-black">
@@ -215,7 +215,7 @@
                         class="py-2.5"
                     >
                         <dt class="font-medium text-neutral-600">
-                            [B2Q7] Other Challenge Specified
+                            Q7. Other Challenge Specified
                         </dt>
                         <dd class="mt-1 font-bold text-black">
                             {{
@@ -232,7 +232,7 @@
                 class="border border-neutral-300 bg-neutral-50 p-4 text-xs text-neutral-600"
             >
                 Block 2 was not applicable because the farmer is not engaged in
-                rice farming (B1Q6 = No).
+                rice farming (Q6 = No).
             </div>
         </div>
     </div>
