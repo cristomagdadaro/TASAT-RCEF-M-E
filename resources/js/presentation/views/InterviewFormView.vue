@@ -1,8 +1,12 @@
 <template>
     <div class="mx-auto max-w-3xl p-4 sm:p-6">
-        <div class="mb-6 flex items-center justify-between border-b border-black pb-4">
+        <div
+            class="mb-6 flex items-center justify-between border-b border-black pb-4"
+        >
             <div>
-                <h2 class="text-xl font-bold uppercase tracking-wide text-black">
+                <h2
+                    class="text-xl font-bold uppercase tracking-wide text-black"
+                >
                     Field Questionnaire
                 </h2>
                 <p class="text-xs text-neutral-600">
@@ -17,7 +21,6 @@
             </router-link>
         </div>
 
-        <!-- Global Error Notice -->
         <div
             v-if="errorMessage"
             class="mb-6 border border-black bg-neutral-200 p-4 text-xs text-black"
@@ -29,30 +32,32 @@
         </div>
 
         <form @submit.prevent="handleSave" class="space-y-6">
-            <!-- Dynamic Block Rendering -->
             <template v-for="block in visibleBlocks" :key="block.id">
                 <section class="border border-black bg-white p-5">
                     <div class="border-b border-neutral-300 pb-3">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+                        <span
+                            class="text-[11px] font-bold uppercase tracking-wider text-neutral-500"
+                        >
                             {{ block.subtitle }}
                         </span>
                         <h3 class="text-base font-bold uppercase text-black">
                             {{ block.title }}
                         </h3>
                         <p class="mt-1 text-xs text-neutral-600">
-                            <strong>Instructions:</strong> {{ block.instructions }}
+                            <strong>Instructions:</strong>
+                            {{ block.instructions }}
                         </p>
                     </div>
 
                     <div class="mt-4 space-y-4">
-                        <!-- Dynamic Question Rendering -->
                         <template
                             v-for="question in visibleQuestions(block)"
                             :key="question.id"
                         >
                             <div
                                 :class="{
-                                    'border-l-2 border-black pl-3 ml-2': question.isConditionalChild,
+                                    'border-l-2 border-black pl-3 ml-2':
+                                        question.isConditionalChild,
                                 }"
                             >
                                 <DynamicQuestionField
@@ -60,7 +65,9 @@
                                     :model-value="formData[question.id]"
                                     :form-data="formData"
                                     :error="getFieldError(question.id)"
-                                    @update:model-value="(val) => (formData[question.id] = val)"
+                                    @update:model-value="
+                                        (val) => (formData[question.id] = val)
+                                    "
                                 />
                             </div>
                         </template>
@@ -68,15 +75,16 @@
                 </section>
             </template>
 
-            <!-- Notice when B1Q6 = No -->
             <div
                 v-if="formData.B1Q6 === 'No'"
                 class="border border-neutral-400 bg-neutral-50 p-4 text-xs text-neutral-700"
             >
-                <strong>Notice:</strong> Block 2 (Rice Farming Information) is hidden because the respondent answered <strong>No</strong> to Q6 (Not currently engaged in rice farming). You may proceed to save Block 1.
+                <strong>Notice:</strong> Block 2 (Rice Farming Information) is
+                hidden because the respondent answered <strong>No</strong> to Q6
+                (Not currently engaged in rice farming). You may proceed to save
+                Block 1.
             </div>
 
-            <!-- Form Actions -->
             <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
                 <router-link
                     :to="{ name: 'interviews' }"
@@ -98,19 +106,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, reactive, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 import {
     QUESTIONNAIRE_BLOCKS,
     type BlockConfig,
     type QuestionConfig,
-} from '../../domain/value-objects/QuestionnaireSchema';
-import { FarmerInformation } from '../../domain/entities/FarmerInformation';
-import { RiceFarmingInformation } from '../../domain/entities/RiceFarmingInformation';
-import { LocalSQLiteSurveyRepository } from '../../infrastructure/repositories/LocalSQLiteSurveyRepository';
-import { SaveSurveyInterviewUseCase } from '../../application/use-cases/SaveSurveyInterviewUseCase';
-import { useAuthStore } from '../store/authStore';
-import DynamicQuestionField from '../components/DynamicQuestionField.vue';
+} from "../../domain/value-objects/QuestionnaireSchema";
+import { FarmerInformation } from "../../domain/entities/FarmerInformation";
+import { RiceFarmingInformation } from "../../domain/entities/RiceFarmingInformation";
+import { LocalSQLiteSurveyRepository } from "../../infrastructure/repositories/LocalSQLiteSurveyRepository";
+import { SaveSurveyInterviewUseCase } from "../../application/use-cases/SaveSurveyInterviewUseCase";
+import { useAuthStore } from "../store/authStore";
+import DynamicQuestionField from "../components/DynamicQuestionField.vue";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -119,19 +127,19 @@ const saveInterviewUseCase = new SaveSurveyInterviewUseCase(surveyRepo);
 
 // Reactive Form State keyed by Unique Question ID (B1Q1 - B2Q7)
 const formData = reactive<Record<string, any>>({
-    B1Q1: '',
-    B1Q2: '',
+    B1Q1: "",
+    B1Q2: "",
     B1Q3: null,
-    B1Q4: 'Nueva Ecija',
-    B1Q5: '',
-    B1Q6: '', // Starts empty: Block 2 ONLY shows when user selects 'Yes'
+    B1Q4: "Nueva Ecija",
+    B1Q5: "",
+    B1Q6: "", // Starts empty: Block 2 ONLY shows when user selects 'Yes'
     B2Q1: null,
-    B2Q2: 'Irrigated',
-    B2Q3: 'Transplanting',
-    B2Q4: '',
-    B2Q5: '',
+    B2Q2: "Irrigated",
+    B2Q3: "Transplanting",
+    B2Q4: "",
+    B2Q5: "",
     B2Q6: [],
-    B2Q7: '',
+    B2Q7: "",
 });
 
 // Dynamic Blocks and Questions Visibility Computation
@@ -156,19 +164,19 @@ const errors = ref<Record<string, string>>({});
 
 // Map question id to backend/domain validation key
 const idToErrorKey: Record<string, string> = {
-    B1Q1: 'b1q1_farmer_name',
-    B1Q2: 'b1q2_sex',
-    B1Q3: 'b1q3_age',
-    B1Q4: 'b1q4_province',
-    B1Q5: 'b1q5_municipality_city',
-    B1Q6: 'b1q6_engaged_in_rice_farming',
-    B2Q1: 'b2q1_total_farm_area',
-    B2Q2: 'b2q2_primary_ecosystem',
-    B2Q3: 'b2q3_establishment_method',
-    B2Q4: 'b2q4_uses_certified_seeds',
-    B2Q5: 'b2q5_seed_variety',
-    B2Q6: 'b2q6_production_challenges',
-    B2Q7: 'b2q7_other_challenge_details',
+    B1Q1: "b1q1_farmer_name",
+    B1Q2: "b1q2_sex",
+    B1Q3: "b1q3_age",
+    B1Q4: "b1q4_province",
+    B1Q5: "b1q5_municipality_city",
+    B1Q6: "b1q6_engaged_in_rice_farming",
+    B2Q1: "b2q1_total_farm_area",
+    B2Q2: "b2q2_primary_ecosystem",
+    B2Q3: "b2q3_establishment_method",
+    B2Q4: "b2q4_uses_certified_seeds",
+    B2Q5: "b2q5_seed_variety",
+    B2Q6: "b2q6_production_challenges",
+    B2Q7: "b2q7_other_challenge_details",
 };
 
 const getFieldError = (qId: string): string | undefined => {
@@ -181,58 +189,58 @@ watch(
     () => formData.B1Q6,
     (newVal) => {
         // When not 'Yes', clean Block 2 fields and errors
-        if (newVal !== 'Yes' && newVal !== true) {
+        if (newVal !== "Yes" && newVal !== true) {
             formData.B2Q1 = null;
-            formData.B2Q2 = 'Irrigated';
-            formData.B2Q3 = 'Transplanting';
-            formData.B2Q4 = '';
-            formData.B2Q5 = '';
+            formData.B2Q2 = "Irrigated";
+            formData.B2Q3 = "Transplanting";
+            formData.B2Q4 = "";
+            formData.B2Q5 = "";
             formData.B2Q6 = [];
-            formData.B2Q7 = '';
+            formData.B2Q7 = "";
 
             const block2Keys = [
-                'b2q1_total_farm_area',
-                'b2q2_primary_ecosystem',
-                'b2q3_establishment_method',
-                'b2q4_uses_certified_seeds',
-                'b2q5_seed_variety',
-                'b2q6_production_challenges',
-                'b2q7_other_challenge_details',
-                'block2',
-                'B2Q1',
-                'B2Q2',
-                'B2Q3',
-                'B2Q4',
-                'B2Q5',
-                'B2Q6',
-                'B2Q7',
+                "b2q1_total_farm_area",
+                "b2q2_primary_ecosystem",
+                "b2q3_establishment_method",
+                "b2q4_uses_certified_seeds",
+                "b2q5_seed_variety",
+                "b2q6_production_challenges",
+                "b2q7_other_challenge_details",
+                "block2",
+                "B2Q1",
+                "B2Q2",
+                "B2Q3",
+                "B2Q4",
+                "B2Q5",
+                "B2Q6",
+                "B2Q7",
             ];
             block2Keys.forEach((k) => delete errors.value[k]);
         }
-    }
+    },
 );
 
 watch(
     () => formData.B2Q4,
     (newVal) => {
-        if (newVal !== 'Yes') {
-            formData.B2Q5 = '';
-            delete errors.value['b2q5_seed_variety'];
-            delete errors.value['B2Q5'];
+        if (newVal !== "Yes") {
+            formData.B2Q5 = "";
+            delete errors.value["b2q5_seed_variety"];
+            delete errors.value["B2Q5"];
         }
-    }
+    },
 );
 
 watch(
     () => formData.B2Q6,
     (newVal) => {
-        if (!Array.isArray(newVal) || !newVal.includes('Others')) {
-            formData.B2Q7 = '';
-            delete errors.value['b2q7_other_challenge_details'];
-            delete errors.value['B2Q7'];
+        if (!Array.isArray(newVal) || !newVal.includes("Others")) {
+            formData.B2Q7 = "";
+            delete errors.value["b2q7_other_challenge_details"];
+            delete errors.value["B2Q7"];
         }
     },
-    { deep: true }
+    { deep: true },
 );
 
 const handleSave = async () => {
@@ -265,17 +273,21 @@ const handleSave = async () => {
         await saveInterviewUseCase.execute(
             farmerInfo,
             riceFarmingInfo,
-            authStore.user ? { id: authStore.user.id, name: authStore.user.name } : null
+            authStore.user
+                ? { id: authStore.user.id, name: authStore.user.name }
+                : null,
         );
 
-        router.push({ name: 'interviews' });
+        router.push({ name: "interviews" });
     } catch (err: any) {
         if (err.errors) {
             errors.value = err.errors;
             errorMessage.value =
-                err.message || 'Validation failed. Please review the highlighted fields.';
+                err.message ||
+                "Validation failed. Please review the highlighted fields.";
         } else {
-            errorMessage.value = err.message || 'An error occurred while saving to SQLite.';
+            errorMessage.value =
+                err.message || "An error occurred while saving to SQLite.";
         }
     } finally {
         isSubmitting.value = false;
