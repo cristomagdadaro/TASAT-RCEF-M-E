@@ -1,19 +1,29 @@
 <template>
-    <header class="border-b border-black bg-white px-4 pb-3 sm:px-6 safe-top-padding">
-        <div class="mx-auto flex max-w-4xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+    <header
+        class="border-b border-black bg-white px-4 pb-3 sm:px-6 safe-top-padding"
+    >
+        <div
+            class="mx-auto flex max-w-4xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
+        >
             <div>
-                <h1 class="text-lg font-bold uppercase tracking-wider text-black">
+                <h1
+                    class="text-lg font-bold uppercase tracking-wider text-black"
+                >
                     TASAT-RCEF M&E
                 </h1>
                 <p class="text-xs text-neutral-600">
-                    Field Survey Questionnaire (Offline SQLite Mode)
+                    Field Survey Questionnaire
                 </p>
             </div>
 
             <div v-if="authStore.user" class="flex items-center gap-3">
                 <div class="text-right text-xs">
-                    <span class="block font-semibold text-black">{{ authStore.user.name }}</span>
-                    <span class="text-neutral-500">ID: {{ authStore.user.username }}</span>
+                    <span class="block font-semibold text-black">{{
+                        authStore.user.name
+                    }}</span>
+                    <span class="text-neutral-500"
+                        >ID: {{ authStore.user.username }}</span
+                    >
                 </div>
                 <button
                     type="button"
@@ -28,14 +38,14 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '../store/authStore';
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../store/authStore";
 
 const authStore = useAuthStore();
 const router = useRouter();
 
 const handleLogout = async () => {
     await authStore.logout();
-    router.push({ name: 'login' });
+    router.push({ name: "login" });
 };
 </script>
