@@ -329,7 +329,7 @@ const handleSave = async () => {
             errorMessage.value =
                 err.message || 'Validation failed. Please review the highlighted fields.';
         } else {
-            errorMessage.value = err.message || 'An error occurred while saving to SQLite.';
+            errorMessage.value = err.message || 'An error occurred while saving the interview.';
         }
     } finally {
         isSubmitting.value = false;

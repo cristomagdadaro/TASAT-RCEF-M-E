@@ -54,11 +54,11 @@ export interface TranslationDictionary {
 export const TRANSLATIONS: Record<string, TranslationDictionary> = {
     en: {
         title: 'Field Questionnaire',
-        subtitle: 'Appendix A: Sample Field Questionnaire \u2022 Offline Entry',
+        subtitle: 'Farmer Survey Form',
         backButton: '\u2190 Back to Records',
         cancelButton: 'Cancel',
-        saveButton: 'Save Interview to SQLite',
-        savingButton: 'Saving to SQLite...',
+        saveButton: 'Save Interview',
+        savingButton: 'Saving...',
         errorHeader: 'Please correct the following before saving:',
         languageLabel: 'Language:',
         block1_title: 'Farmer Information',
@@ -116,11 +116,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     fil: {
         title: 'Kwestyoner sa Bukid',
-        subtitle: 'Apendiks A: Halimbawang Kwestyoner sa Bukid \u2022 Offline Entry',
+        subtitle: 'Form sa Sarbey ng Magsasaka',
         backButton: '\u2190 Bumalik sa Talaan',
         cancelButton: 'Kanselahin',
-        saveButton: 'I-save ang Panayam sa SQLite',
-        savingButton: 'Kasalukuyang Sine-save sa SQLite...',
+        saveButton: 'I-save ang Panayam',
+        savingButton: 'Kasalukuyang Sine-save...',
         errorHeader: 'Pakitama ang mga sumusunod bago i-save:',
         languageLabel: 'Language / Wika:',
         block1_title: 'Impormasyon ng Magsasaka',
@@ -178,11 +178,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     ilo: {
         title: 'Kuestioner iti Talon',
-        subtitle: 'Apendiks A: Wagas ti Panagsurbey iti Mannalon \u2022 Offline Entry',
+        subtitle: 'Pormulario ti Surbey ti Mannalon',
         backButton: '\u2190 Agsubli iti Listaan',
         cancelButton: 'Ibabawi',
-        saveButton: 'Idulin ti Interbio iti SQLite',
-        savingButton: 'Madama nga Iduldulin iti SQLite...',
+        saveButton: 'Idulin ti Interbio',
+        savingButton: 'Madama nga Iduldulin...',
         errorHeader: 'Pakisursurat ti umno sakbay nga idulin:',
         languageLabel: 'Language / Pagsasao:',
         block1_title: 'Impormasion ti Mannalon',
@@ -240,11 +240,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     ceb: {
         title: 'Kwestyoner sa Umahan',
-        subtitle: 'Apendiks A: Sumbanan sa Kwestyoner sa Uma \u2022 Offline Entry',
+        subtitle: 'Porma sa Sarbey sa Mag-uuma',
         backButton: '\u2190 Balik sa Listahan',
         cancelButton: 'Kanselahon',
-        saveButton: 'I-save ang Interbyu sa SQLite',
-        savingButton: 'Gisave sa SQLite...',
+        saveButton: 'I-save ang Interbyu',
+        savingButton: 'Gisave...',
         errorHeader: 'Palihug tarunga kining mosunod sa dili pa i-save:',
         languageLabel: 'Language / Pinulongan:',
         block1_title: 'Impormasyon sa Mag-uuma',
@@ -302,11 +302,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     hil: {
         title: 'Kwestyoner sang Uma',
-        subtitle: 'Apendiks A: Ehemplo sang Kwestyoner sa Uma \u2022 Offline Entry',
+        subtitle: 'Porma sang Sarbey sang Mangunguma',
         backButton: '\u2190 Balik sa Listahan',
         cancelButton: 'Kanselahon',
-        saveButton: 'I-save ang Interbyu sa SQLite',
-        savingButton: 'Ginasave sa SQLite...',
+        saveButton: 'I-save ang Interbyu',
+        savingButton: 'Ginasave...',
         errorHeader: 'Palihog tadlunga ang mga masunod antes i-save:',
         languageLabel: 'Language / Hambal:',
         block1_title: 'Impormasyon sang Mangunguma',
@@ -364,11 +364,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     war: {
         title: 'Kwestyoner han Humayan',
-        subtitle: 'Apendiks A: Sumbanan han Kwestyoner ha Uma \u2022 Offline Entry',
+        subtitle: 'Porma han Sarbey han Parag-uma',
         backButton: '\u2190 Balik ha Listahan',
         cancelButton: 'Kanselahon',
-        saveButton: 'I-save an Interbyu ha SQLite',
-        savingButton: 'Ginsasave ha SQLite...',
+        saveButton: 'I-save an Interbyu',
+        savingButton: 'Ginsasave...',
         errorHeader: 'Alayon tadonga an mga masunod san-o i-save:',
         languageLabel: 'Language / Yinaknan:',
         block1_title: 'Impormasyon han Parag-uma',
@@ -426,11 +426,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     bik: {
         title: 'Kwestyoner kan Paraoma',
-        subtitle: 'Apendiks A: Halimbawa nin Kwestyoner sa Uma \u2022 Offline Entry',
+        subtitle: 'Porma nin Sarbey kan Paraoma',
         backButton: '\u2190 Magbalik sa Listahan',
         cancelButton: 'Kanselahon',
-        saveButton: 'I-save an Interbyu sa SQLite',
-        savingButton: 'Pigsasave sa SQLite...',
+        saveButton: 'I-save an Interbyu',
+        savingButton: 'Pigsasave...',
         errorHeader: 'Pakitama an mga minasunod bago i-save:',
         languageLabel: 'Language / Taramon:',
         block1_title: 'Impormasyon kan Paraoma',
@@ -488,11 +488,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     pam: {
         title: 'Kwestyunaryu king Asikan',
-        subtitle: 'Apendiks A: Alimbawa ning Kwestyunaryu \u2022 Offline Entry',
+        subtitle: 'Pormularyu ning Sarbey king Kasamak',
         backButton: '\u2190 Mibalik king Talaan',
         cancelButton: 'Ibawi',
-        saveButton: 'I-save ing Panayam king SQLite',
-        savingButton: 'Kasalungsungang Isisave king SQLite...',
+        saveButton: 'I-save ing Panayam',
+        savingButton: 'Kasalungsungang Isisave...',
         errorHeader: 'Pakitulid la ring makatuki bayu i-save:',
         languageLabel: 'Language / Amanu:',
         block1_title: 'Impormasyun ning Kasamak',
@@ -550,11 +550,11 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 
     pag: {
         title: 'Kwestyunaryo ed Panagdalon',
-        subtitle: 'Apendiks A: Alimbawa na Kwestyunaryo \u2022 Offline Entry',
+        subtitle: 'Porma na Sarbey na Manag-dalon',
         backButton: '\u2190 Pawil ed Listaan',
         cancelButton: 'Iatras',
-        saveButton: 'I-save so Interbyu ed SQLite',
-        savingButton: 'Isasave la ed SQLite...',
+        saveButton: 'I-save so Interbyu',
+        savingButton: 'Isasave la...',
         errorHeader: 'Ipustem irayan onsublay antis ya i-save:',
         languageLabel: 'Language / Salita:',
         block1_title: 'Impormasyon na Manag-dalon',

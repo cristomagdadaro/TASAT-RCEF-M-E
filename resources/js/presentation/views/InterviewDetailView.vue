@@ -30,14 +30,14 @@
             v-if="loading"
             class="border border-black bg-white p-6 text-center text-sm text-neutral-600"
         >
-            Loading interview details from SQLite...
+            Loading interview details...
         </div>
 
         <div
             v-else-if="!interview"
             class="border border-black bg-white p-6 text-center text-sm text-black"
         >
-            Interview record not found in local SQLite database.
+            Interview record not found.
         </div>
 
         <div v-else class="space-y-6">

@@ -126,7 +126,6 @@ const handleSubmit = async () => {
         await authStore.login(identifier.value, password.value);
         router.push({ name: "interviews" });
     } catch (e) {
-        // Handled in store
     }
 };
 </script>

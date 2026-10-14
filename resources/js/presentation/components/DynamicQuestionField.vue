@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex items-center justify-between">
+        <div>
             <label
                 :for="question.id"
                 class="text-xs font-bold uppercase text-black"
@@ -8,9 +8,6 @@
                 {{ question.qNumber }}. {{ displayLabel }}
                 <span v-if="isRequired" class="text-red-700">*</span>
             </label>
-            <span class="text-[11px] text-neutral-500">{{
-                question.badge
-            }}</span>
         </div>
 
         <div v-if="question.type === 'text'" class="mt-1">

@@ -9,7 +9,7 @@
                 >
                     Saved Survey Interviews
                 </h2>
-                <p class="text-xs text-neutral-600">Local Storage Database</p>
+                <p class="text-xs text-neutral-600">Offline Field Records</p>
             </div>
 
             <div class="flex items-center gap-2">
@@ -41,7 +41,7 @@
             v-if="loading"
             class="border border-black bg-white p-6 text-center text-sm text-neutral-700"
         >
-            Loading saved interview records from SQLite...
+            Loading saved interview records...
         </div>
 
         <div
@@ -52,8 +52,7 @@
                 No Interviews Found
             </p>
             <p class="mt-1 text-xs text-neutral-600">
-                No farmer survey interviews have been recorded in the local
-                SQLite database yet.
+                No farmer survey interviews have been recorded yet.
             </p>
             <div class="mt-4">
                 <router-link

@@ -9,7 +9,8 @@
         <footer
             class="border-t border-neutral-300 bg-white py-3 text-center text-xs text-neutral-500"
         >
-            TASAT-RCEF M&E &bull; (SQLite Storage)
+            TASAT-RCEF M&E &bull; Offline Field Survey &bull; Cristo Rey C.
+            Magdadaro
         </footer>
     </div>
 </template>
