@@ -33,7 +33,7 @@
                         :key="lang.code"
                         :value="lang.code"
                     >
-                        {{ lang.name }} ({{ lang.region }})
+                        {{ lang.name }}
                     </option>
                 </select>
             </div>

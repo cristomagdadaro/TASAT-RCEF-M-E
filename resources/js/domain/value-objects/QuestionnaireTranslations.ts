@@ -1,19 +1,18 @@
 export interface LanguageOption {
     code: string;
     name: string;
-    region: string;
 }
 
 export const SUPPORTED_LANGUAGES: LanguageOption[] = [
-    { code: 'en', name: 'English', region: 'Default' },
-    { code: 'fil', name: 'Tagalog (Filipino)', region: 'National / Central & Southern Luzon' },
-    { code: 'ilo', name: 'Ilokano (Ilocano)', region: 'Northern Luzon / Region 1, 2, CAR' },
-    { code: 'ceb', name: 'Cebuano (Bisaya)', region: 'Central Visayas & Mindanao' },
-    { code: 'hil', name: 'Hiligaynon (Ilonggo)', region: 'Western Visayas & SOCCSKSARGEN' },
-    { code: 'war', name: 'Waray-Waray', region: 'Eastern Visayas / Samar, Leyte' },
-    { code: 'bik', name: 'Bikol', region: 'Bicol Region / Region 5' },
-    { code: 'pam', name: 'Kapampangan', region: 'Central Luzon / Pampanga, Tarlac' },
-    { code: 'pag', name: 'Pangasinan', region: 'Pangasinan / Central & Northern Luzon' },
+    { code: 'en', name: 'English' },
+    { code: 'fil', name: 'Tagalog (Filipino)' },
+    { code: 'ilo', name: 'Ilokano' },
+    { code: 'ceb', name: 'Cebuano (Bisaya)' },
+    { code: 'hil', name: 'Hiligaynon (Ilonggo)' },
+    { code: 'war', name: 'Waray-Waray' },
+    { code: 'bik', name: 'Bikol' },
+    { code: 'pam', name: 'Kapampangan' },
+    { code: 'pag', name: 'Pangasinan' },
 ];
 
 export interface TranslationDictionary {
