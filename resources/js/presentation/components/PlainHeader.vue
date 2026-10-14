@@ -1,5 +1,5 @@
 <template>
-    <header class="border-b border-black bg-white px-4 py-3 sm:px-6">
+    <header class="border-b border-black bg-white px-4 pb-3 sm:px-6 safe-top-padding">
         <div class="mx-auto flex max-w-4xl flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
                 <h1 class="text-lg font-bold uppercase tracking-wider text-black">

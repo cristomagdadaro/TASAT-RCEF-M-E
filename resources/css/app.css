@@ -35,3 +35,12 @@ textarea {
 html, body, #app {
     min-height: 100%;
 }
+
+/* Safe area insets for notches, punch holes, and mobile status bar */
+.safe-top-padding {
+    padding-top: max(env(safe-area-inset-top), 0.75rem);
+}
+
+.safe-bottom-padding {
+    padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+}

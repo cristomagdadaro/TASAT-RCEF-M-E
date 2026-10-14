@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-[calc(100vh-60px)] items-center justify-center p-4">
+    <div class="flex min-h-[calc(100vh-60px)] items-center justify-center p-4 safe-top-padding">
         <div class="w-full max-w-md border border-black bg-white p-6">
             <div class="mb-6 border-b border-neutral-300 pb-4">
                 <h2 class="text-xl font-bold uppercase tracking-wide text-black">
