@@ -23,6 +23,7 @@
 /vendor
 /dist
 /android/.gradle
+/android/.idea
 /android/app/build
 /android/build
 _ide_helper.php

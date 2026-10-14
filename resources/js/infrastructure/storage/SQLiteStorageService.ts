@@ -1,4 +1,6 @@
 import initSqlJs, { Database } from 'sql.js';
+import sqlWasmBrowserUrl from 'sql.js/dist/sql-wasm-browser.wasm?url';
+import sqlWasmUrl from 'sql.js/dist/sql-wasm.wasm?url';
 import { Preferences } from '@capacitor/preferences';
 
 const STORAGE_KEY = 'tasat_rcef_sqlite_db';
@@ -31,7 +33,12 @@ export class SQLiteStorageService {
         this.initPromise = (async () => {
             try {
                 const SQL = await initSqlJs({
-                    locateFile: (file) => `/${file}`,
+                    locateFile: (file) => {
+                        if (file.includes('browser')) {
+                            return sqlWasmBrowserUrl || '/sql-wasm-browser.wasm';
+                        }
+                        return sqlWasmUrl || '/sql-wasm.wasm';
+                    },
                 });
 
                 // Check if existing SQLite binary database is persisted

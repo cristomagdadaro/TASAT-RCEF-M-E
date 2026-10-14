@@ -49,7 +49,7 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to) => {
     const authStore = useAuthStore();
 
     if (!authStore.isInitialized) {
@@ -57,14 +57,14 @@ router.beforeEach(async (to, from, next) => {
     }
 
     if (to.meta.requiresAuth && !authStore.user) {
-        return next({ name: 'login' });
+        return { name: 'login' };
     }
 
     if (to.meta.guestOnly && authStore.user) {
-        return next({ name: 'interviews' });
+        return { name: 'interviews' };
     }
 
-    next();
+    return true;
 });
 
 export default router;
