@@ -9,9 +9,7 @@
                 >
                     Saved Survey Interviews
                 </h2>
-                <p class="text-xs text-neutral-600">
-                    SQLite Local Storage Database
-                </p>
+                <p class="text-xs text-neutral-600">Local Storage Database</p>
             </div>
 
             <div class="flex items-center gap-2">

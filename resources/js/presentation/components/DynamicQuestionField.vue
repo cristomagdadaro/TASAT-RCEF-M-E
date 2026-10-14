@@ -5,7 +5,7 @@
                 :for="question.id"
                 class="text-xs font-bold uppercase text-black"
             >
-                {{ question.qNumber }}. {{ question.label }}
+                {{ question.qNumber }}. {{ displayLabel }}
                 <span v-if="isRequired" class="text-red-700">*</span>
             </label>
             <span class="text-[11px] text-neutral-500">{{
@@ -18,7 +18,7 @@
                 :id="question.id"
                 :value="modelValue"
                 type="text"
-                :placeholder="question.placeholder || 'Enter response'"
+                :placeholder="displayPlaceholder"
                 class="w-full border border-black px-3 py-2 text-sm text-black focus:outline-none"
                 :class="{ 'border-red-600': Boolean(error) }"
                 @input="
@@ -38,7 +38,7 @@
                 :step="question.step || '1'"
                 :min="question.min"
                 :max="question.max"
-                :placeholder="question.placeholder || 'Enter number'"
+                :placeholder="displayPlaceholder"
                 class="w-full border border-black px-3 py-2 text-sm text-black focus:outline-none"
                 :class="{ 'border-red-600': Boolean(error) }"
                 @input="handleNumberInput"
@@ -63,7 +63,7 @@
                     @change="$emit('update:modelValue', opt)"
                 />
                 <span :class="{ 'font-semibold': modelValue === opt }">
-                    {{ opt }}
+                    {{ getOptionText(opt) }}
                 </span>
             </label>
         </div>
@@ -82,10 +82,10 @@
                 "
             >
                 <option value="" disabled>
-                    -- Select {{ question.label }} --
+                    -- Select {{ displayLabel }} --
                 </option>
                 <option v-for="opt in question.options" :key="opt" :value="opt">
-                    {{ opt }}
+                    {{ getOptionText(opt) }}
                 </option>
             </select>
         </div>
@@ -113,7 +113,7 @@
                         )
                     "
                 />
-                <span>{{ opt }}</span>
+                <span>{{ getOptionText(opt) }}</span>
             </label>
         </div>
 
@@ -122,7 +122,7 @@
                 :id="question.id"
                 :value="modelValue"
                 rows="2"
-                :placeholder="question.placeholder || 'Specify details...'"
+                :placeholder="displayPlaceholder"
                 class="w-full border border-black p-2 text-sm text-black focus:outline-none"
                 :class="{ 'border-red-600': Boolean(error) }"
                 @input="
@@ -149,11 +149,27 @@ const props = defineProps<{
     modelValue: any;
     formData?: Record<string, any>;
     error?: string;
+    label?: string;
+    placeholder?: string;
+    optionLabels?: Record<string, string>;
 }>();
 
 const emit = defineEmits<{
     (e: "update:modelValue", val: any): void;
 }>();
+
+const displayLabel = computed(() => props.label || props.question.label);
+
+const displayPlaceholder = computed(() => {
+    if (props.placeholder !== undefined && props.placeholder !== null) {
+        return props.placeholder;
+    }
+    return props.question.placeholder || "Enter response";
+});
+
+const getOptionText = (opt: string) => {
+    return props.optionLabels?.[opt] || opt;
+};
 
 const isRequired = computed(() => {
     if (typeof props.question.required === "function") {

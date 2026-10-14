@@ -97,7 +97,6 @@ export const QUESTIONNAIRE_BLOCKS: BlockConfig[] = [
         subtitle: 'Block 2',
         title: 'Rice Farming Information',
         instructions: 'Fill-in the required information',
-        // Condition: ONLY show Block 2 when B1Q6 is 'Yes' or true
         condition: (form: Record<string, any>) => form.B1Q6 === 'Yes' || form.B1Q6 === true,
         questions: [
             {
