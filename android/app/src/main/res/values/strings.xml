@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TASAT-RCEF M&amp;E</string>
+    <string name="title_activity_main">TASAT-RCEF M&amp;E</string>
+    <string name="package_name">ph.gov.philrice.rcef.tasat</string>
+    <string name="custom_url_scheme">ph.gov.philrice.rcef.tasat</string>
+</resources>
