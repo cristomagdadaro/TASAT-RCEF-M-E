@@ -33,6 +33,12 @@ const routes = [
         meta: { requiresAuth: true },
     },
     {
+        path: '/interviews/:id/edit',
+        name: 'edit-interview',
+        component: InterviewFormView,
+        meta: { requiresAuth: true },
+    },
+    {
         path: '/interviews/:id',
         name: 'interview-detail',
         component: InterviewDetailView,

@@ -60,7 +60,58 @@ export class LocalSQLiteSurveyRepository implements ISurveyRepository {
             ? JSON.stringify(json.b2q6_production_challenges)
             : null;
 
-        const sql = `
+        const existing = await this.getById(json.reference_id);
+
+        if (existing) {
+            const updateSql = `
+                UPDATE farmer_surveys SET
+                    enumerator_id = ?,
+                    enumerator_name = ?,
+                    interview_date = ?,
+                    b1q1_farmer_name = ?,
+                    b1q2_sex = ?,
+                    b1q3_age = ?,
+                    b1q4_province = ?,
+                    b1q5_municipality_city = ?,
+                    b1q6_engaged_in_rice_farming = ?,
+                    b2q1_total_farm_area = ?,
+                    b2q2_primary_ecosystem = ?,
+                    b2q3_establishment_method = ?,
+                    b2q4_uses_certified_seeds = ?,
+                    b2q5_seed_variety = ?,
+                    b2q6_production_challenges = ?,
+                    b2q7_other_challenge_details = ?,
+                    sync_status = ?
+                WHERE reference_id = ?
+            `;
+
+            const updateParams = [
+                json.enumerator_id ?? null,
+                json.enumerator_name ?? null,
+                json.interview_date,
+                json.b1q1_farmer_name,
+                json.b1q2_sex,
+                json.b1q3_age,
+                json.b1q4_province,
+                json.b1q5_municipality_city,
+                json.b1q6_engaged_in_rice_farming,
+                json.b2q1_total_farm_area,
+                json.b2q2_primary_ecosystem,
+                json.b2q3_establishment_method,
+                json.b2q4_uses_certified_seeds,
+                json.b2q5_seed_variety,
+                challengesStr,
+                json.b2q7_other_challenge_details,
+                json.sync_status || 'local_only',
+                json.reference_id,
+            ];
+
+            await this.storage.executeRun(updateSql, updateParams);
+            const updated = await this.getById(json.reference_id);
+            return updated || interview;
+        }
+
+        const insertSql = `
             INSERT INTO farmer_surveys (
                 reference_id,
                 enumerator_id,
@@ -84,7 +135,7 @@ export class LocalSQLiteSurveyRepository implements ISurveyRepository {
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
-        const params = [
+        const insertParams = [
             json.reference_id,
             json.enumerator_id ?? null,
             json.enumerator_name ?? null,
@@ -106,11 +157,19 @@ export class LocalSQLiteSurveyRepository implements ISurveyRepository {
             json.created_at || new Date().toISOString(),
         ];
 
-        await this.storage.executeRun(sql, params);
+        await this.storage.executeRun(insertSql, insertParams);
 
-        // Fetch inserted entity with its auto-generated id
         const inserted = await this.getById(json.reference_id);
         return inserted || interview;
+    }
+
+    public async delete(referenceId: string): Promise<boolean> {
+        await this.storage.initialize();
+        await this.storage.executeRun(
+            'DELETE FROM farmer_surveys WHERE reference_id = ? OR id = ?',
+            [referenceId, referenceId]
+        );
+        return true;
     }
 
     public async count(): Promise<number> {

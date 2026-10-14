@@ -3,10 +3,10 @@
         <div class="mb-4 flex items-center justify-between border-b border-black pb-4">
             <div>
                 <h2 class="text-xl font-bold uppercase tracking-wide text-black">
-                    {{ currentTranslation.title }}
+                    {{ isEditMode ? 'Update Survey Interview' : currentTranslation.title }}
                 </h2>
                 <p class="text-xs text-neutral-600">
-                    {{ currentTranslation.subtitle }}
+                    {{ isEditMode ? `Editing Record: ${editReferenceId}` : currentTranslation.subtitle }}
                 </p>
             </div>
             <router-link
@@ -112,8 +112,12 @@
                     :disabled="isSubmitting"
                     class="border border-black bg-black px-6 py-2.5 text-center text-sm font-bold uppercase tracking-wider text-white hover:bg-neutral-800 disabled:opacity-50"
                 >
-                    <span v-if="isSubmitting">{{ currentTranslation.savingButton }}</span>
-                    <span v-else>{{ currentTranslation.saveButton }}</span>
+                    <span v-if="isSubmitting">
+                        {{ isEditMode ? 'Updating...' : currentTranslation.savingButton }}
+                    </span>
+                    <span v-else>
+                        {{ isEditMode ? 'Update Interview' : currentTranslation.saveButton }}
+                    </span>
                 </button>
             </div>
         </form>
@@ -121,8 +125,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, reactive, ref, watch, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import {
     QUESTIONNAIRE_BLOCKS,
     type BlockConfig,
@@ -140,9 +144,13 @@ import { useAuthStore } from '../store/authStore';
 import DynamicQuestionField from '../components/DynamicQuestionField.vue';
 
 const router = useRouter();
+const route = useRoute();
 const authStore = useAuthStore();
 const surveyRepo = new LocalSQLiteSurveyRepository();
 const saveInterviewUseCase = new SaveSurveyInterviewUseCase(surveyRepo);
+
+const isEditMode = computed(() => !!route.params.id);
+const editReferenceId = computed(() => (route.params.id as string) || null);
 
 const currentLanguage = ref<string>(localStorage.getItem('preferred_language') || 'en');
 
@@ -319,7 +327,8 @@ const handleSave = async () => {
         await saveInterviewUseCase.execute(
             farmerInfo,
             riceFarmingInfo,
-            authStore.user ? { id: authStore.user.id, name: authStore.user.name } : null
+            authStore.user ? { id: authStore.user.id, name: authStore.user.name } : null,
+            editReferenceId.value || undefined
         );
 
         router.push({ name: 'interviews' });
@@ -335,4 +344,34 @@ const handleSave = async () => {
         isSubmitting.value = false;
     }
 };
+
+onMounted(async () => {
+    if (editReferenceId.value) {
+        try {
+            const existing = await surveyRepo.getById(editReferenceId.value);
+            if (existing) {
+                formData.B1Q1 = existing.farmerInfo.b1q1FarmerName;
+                formData.B1Q2 = existing.farmerInfo.b1q2Sex;
+                formData.B1Q3 = existing.farmerInfo.b1q3Age;
+                formData.B1Q4 = existing.farmerInfo.b1q4Province;
+                formData.B1Q5 = existing.farmerInfo.b1q5MunicipalityCity;
+                formData.B1Q6 = existing.farmerInfo.b1q6EngagedInRiceFarming;
+
+                if (existing.riceFarmingInfo) {
+                    formData.B2Q1 = existing.riceFarmingInfo.b2q1TotalFarmArea;
+                    formData.B2Q2 = existing.riceFarmingInfo.b2q2PrimaryEcosystem;
+                    formData.B2Q3 = existing.riceFarmingInfo.b2q3EstablishmentMethod;
+                    formData.B2Q4 = existing.riceFarmingInfo.b2q4UsesCertifiedSeeds;
+                    formData.B2Q5 = existing.riceFarmingInfo.b2q5SeedVariety || '';
+                    formData.B2Q6 = existing.riceFarmingInfo.b2q6ProductionChallenges
+                        ? [...existing.riceFarmingInfo.b2q6ProductionChallenges]
+                        : [];
+                    formData.B2Q7 = existing.riceFarmingInfo.b2q7OtherChallengeDetails || '';
+                }
+            }
+        } catch (e) {
+            console.error('Failed to load existing interview for editing:', e);
+        }
+    }
+});
 </script>
