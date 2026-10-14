@@ -5,7 +5,6 @@ import InterviewListView from '../views/InterviewListView.vue';
 import InterviewFormView from '../views/InterviewFormView.vue';
 import InterviewDetailView from '../views/InterviewDetailView.vue';
 
-// Use Hash history for Capacitor mobile offline WebView compatibility
 const isCapacitor = typeof (window as any).Capacitor !== 'undefined';
 const history = isCapacitor ? createWebHashHistory() : createWebHistory();
 

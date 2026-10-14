@@ -2,21 +2,21 @@
     <div
         class="flex min-h-[calc(100vh-60px)] items-center justify-center p-4 safe-top-padding"
     >
-        <div class="w-full max-w-md border border-black bg-white p-6">
-            <div class="mb-6 border-b border-neutral-300 pb-4">
+        <div class="w-full max-w-md border border-black dark:border-neutral-800 bg-white dark:bg-[#171717] p-6 transition-colors">
+            <div class="mb-6 border-b border-neutral-300 dark:border-neutral-800 pb-4">
                 <h2
-                    class="text-xl font-bold uppercase tracking-wide text-black"
+                    class="text-xl font-bold uppercase tracking-wide text-black dark:text-white"
                 >
                     Login to TASAT-RCEF
                 </h2>
-                <p class="mt-1 text-xs text-neutral-600">
+                <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
                     Monitoring & Evaluation Field System
                 </p>
             </div>
 
             <div
                 v-if="authStore.errorMessage"
-                class="mb-4 border border-black bg-neutral-200 p-3 text-xs text-black"
+                class="mb-4 border border-black dark:border-neutral-700 bg-neutral-200 dark:bg-neutral-800 p-3 text-xs text-black dark:text-white"
             >
                 <strong>Error:</strong> {{ authStore.errorMessage }}
             </div>
@@ -25,7 +25,7 @@
                 <div>
                     <label
                         for="identifier"
-                        class="mb-1 block text-xs font-bold uppercase tracking-wide text-black"
+                        class="mb-1 block text-xs font-bold uppercase tracking-wide text-black dark:text-neutral-300"
                     >
                         Username or Email
                     </label>
@@ -35,7 +35,7 @@
                         type="text"
                         autocomplete="username"
                         required
-                        class="w-full border border-black px-3 py-2 text-sm text-black focus:outline-none"
+                        class="w-full border border-black dark:border-neutral-700 bg-white dark:bg-[#121212] px-3 py-2 text-sm text-black dark:text-white focus:outline-none"
                         placeholder="e.g. enumerator1"
                     />
                 </div>
@@ -43,7 +43,7 @@
                 <div>
                     <label
                         for="password"
-                        class="mb-1 block text-xs font-bold uppercase tracking-wide text-black"
+                        class="mb-1 block text-xs font-bold uppercase tracking-wide text-black dark:text-neutral-300"
                     >
                         Password
                     </label>
@@ -53,7 +53,7 @@
                         type="password"
                         autocomplete="current-password"
                         required
-                        class="w-full border border-black px-3 py-2 text-sm text-black focus:outline-none"
+                        class="w-full border border-black dark:border-neutral-700 bg-white dark:bg-[#121212] px-3 py-2 text-sm text-black dark:text-white focus:outline-none"
                         placeholder="••••••••"
                     />
                 </div>
@@ -69,32 +69,32 @@
                 </div>
             </form>
 
-            <div class="mt-6 border-t border-neutral-300 pt-4">
-                <p class="mb-2 text-xs font-bold uppercase text-neutral-600">
+            <div class="mt-6 border-t border-neutral-300 dark:border-neutral-800 pt-4">
+                <p class="mb-2 text-xs font-bold uppercase text-neutral-600 dark:text-neutral-400">
                     Test Accounts (Choose to Fill):
                 </p>
                 <div class="grid grid-cols-2 gap-2 text-xs">
                     <button
                         type="button"
                         @click="fillAccount('enumerator1', 'Password123!')"
-                        class="border border-neutral-400 bg-neutral-50 p-2 text-left hover:bg-neutral-200"
+                        class="border border-neutral-400 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-2 text-left hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
                     >
-                        <span class="block font-semibold text-black"
+                        <span class="block font-semibold text-black dark:text-white"
                             >Account 1</span
                         >
-                        <span class="block text-neutral-600"
+                        <span class="block text-neutral-600 dark:text-neutral-400"
                             >ID: enumerator1</span
                         >
                     </button>
                     <button
                         type="button"
                         @click="fillAccount('enumerator2', 'Password123!')"
-                        class="border border-neutral-400 bg-neutral-50 p-2 text-left hover:bg-neutral-200"
+                        class="border border-neutral-400 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-2 text-left hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
                     >
-                        <span class="block font-semibold text-black"
+                        <span class="block font-semibold text-black dark:text-white"
                             >Account 2</span
                         >
-                        <span class="block text-neutral-600"
+                        <span class="block text-neutral-600 dark:text-neutral-400"
                             >ID: enumerator2</span
                         >
                     </button>

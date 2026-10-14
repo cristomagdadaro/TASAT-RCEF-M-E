@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-[#f5f5f5] text-neutral-900 font-sans min-h-screen antialiased">
+<body class="bg-[#f5f5f5] dark:bg-[#0f0f0f] text-neutral-900 dark:text-[#f5f5f5] font-sans min-h-screen antialiased">
     <div id="app"></div>
 </body>
 </html>

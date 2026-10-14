@@ -3,10 +3,10 @@
         <div>
             <label
                 :for="question.id"
-                class="text-xs font-bold uppercase text-black"
+                class="text-xs font-bold uppercase text-black dark:text-neutral-200"
             >
                 {{ question.qNumber }}. {{ displayLabel }}
-                <span v-if="isRequired" class="text-red-700">*</span>
+                <span v-if="isRequired" class="text-red-700 dark:text-red-400">*</span>
             </label>
         </div>
 
@@ -16,8 +16,8 @@
                 :value="modelValue"
                 type="text"
                 :placeholder="displayPlaceholder"
-                class="w-full border border-black px-3 py-2 text-sm text-black focus:outline-none"
-                :class="{ 'border-red-600': Boolean(error) }"
+                class="w-full border border-black dark:border-neutral-700 bg-white dark:bg-[#121212] px-3 py-2 text-sm text-black dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none transition-colors"
+                :class="{ 'border-red-600 dark:border-red-500': Boolean(error) }"
                 @input="
                     $emit(
                         'update:modelValue',
@@ -36,30 +36,35 @@
                 :min="question.min"
                 :max="question.max"
                 :placeholder="displayPlaceholder"
-                class="w-full border border-black px-3 py-2 text-sm text-black focus:outline-none"
-                :class="{ 'border-red-600': Boolean(error) }"
+                class="w-full border border-black dark:border-neutral-700 bg-white dark:bg-[#121212] px-3 py-2 text-sm text-black dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none transition-colors"
+                :class="{ 'border-red-600 dark:border-red-500': Boolean(error) }"
                 @input="handleNumberInput"
             />
         </div>
 
         <div
             v-else-if="question.type === 'radio'"
-            class="mt-2 flex flex-wrap gap-6 text-sm text-black"
+            class="mt-2 flex flex-wrap gap-2 text-sm text-black dark:text-white"
         >
             <label
                 v-for="opt in question.options"
                 :key="opt"
-                class="flex cursor-pointer items-center gap-2"
+                class="flex cursor-pointer items-center gap-2 border px-3 py-2 text-xs transition-colors"
+                :class="
+                    modelValue === opt
+                        ? 'border-black dark:border-white bg-neutral-100 dark:bg-neutral-800 font-bold text-black dark:text-white'
+                        : 'border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#171717] text-neutral-800 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800'
+                "
             >
                 <input
                     type="radio"
                     :name="question.id"
                     :value="opt"
                     :checked="modelValue === opt"
-                    class="accent-black"
+                    class="accent-black dark:accent-white"
                     @change="$emit('update:modelValue', opt)"
                 />
-                <span :class="{ 'font-semibold': modelValue === opt }">
+                <span>
                     {{ getOptionText(opt) }}
                 </span>
             </label>
@@ -69,8 +74,8 @@
             <select
                 :id="question.id"
                 :value="modelValue"
-                class="w-full border border-black bg-white px-3 py-2 text-sm text-black focus:outline-none"
-                :class="{ 'border-red-600': Boolean(error) }"
+                class="w-full border border-black dark:border-neutral-700 bg-white dark:bg-[#121212] px-3 py-2 text-sm text-black dark:text-white focus:outline-none transition-colors"
+                :class="{ 'border-red-600 dark:border-red-500': Boolean(error) }"
                 @change="
                     $emit(
                         'update:modelValue',
@@ -78,10 +83,15 @@
                     )
                 "
             >
-                <option value="" disabled>
+                <option value="" disabled class="bg-white dark:bg-neutral-900 text-black dark:text-white">
                     -- Select {{ displayLabel }} --
                 </option>
-                <option v-for="opt in question.options" :key="opt" :value="opt">
+                <option
+                    v-for="opt in question.options"
+                    :key="opt"
+                    :value="opt"
+                    class="bg-white dark:bg-neutral-900 text-black dark:text-white"
+                >
                     {{ getOptionText(opt) }}
                 </option>
             </select>
@@ -89,12 +99,17 @@
 
         <div
             v-else-if="question.type === 'checkbox'"
-            class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 text-sm text-black"
+            class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 text-sm text-black dark:text-white"
         >
             <label
                 v-for="opt in question.options"
                 :key="opt"
-                class="flex cursor-pointer items-center gap-2 border border-neutral-300 p-2 hover:bg-neutral-50"
+                class="flex cursor-pointer items-center gap-2 border p-2 text-xs transition-colors"
+                :class="
+                    Array.isArray(modelValue) && modelValue.includes(opt)
+                        ? 'border-black dark:border-white bg-neutral-100 dark:bg-neutral-800 font-semibold text-black dark:text-white'
+                        : 'border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#171717] text-neutral-800 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800'
+                "
             >
                 <input
                     type="checkbox"
@@ -102,7 +117,7 @@
                     :checked="
                         Array.isArray(modelValue) && modelValue.includes(opt)
                     "
-                    class="accent-black"
+                    class="accent-black dark:accent-white"
                     @change="
                         handleCheckboxChange(
                             opt,
@@ -120,8 +135,8 @@
                 :value="modelValue"
                 rows="2"
                 :placeholder="displayPlaceholder"
-                class="w-full border border-black p-2 text-sm text-black focus:outline-none"
-                :class="{ 'border-red-600': Boolean(error) }"
+                class="w-full border border-black dark:border-neutral-700 bg-white dark:bg-[#121212] p-2 text-sm text-black dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none transition-colors"
+                :class="{ 'border-red-600 dark:border-red-500': Boolean(error) }"
                 @input="
                     $emit(
                         'update:modelValue',
@@ -131,7 +146,7 @@
             ></textarea>
         </div>
 
-        <p v-if="error" class="mt-1 text-xs text-red-700">
+        <p v-if="error" class="mt-1 text-xs text-red-700 dark:text-red-400">
             {{ error }}
         </p>
     </div>

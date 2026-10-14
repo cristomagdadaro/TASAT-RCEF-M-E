@@ -37,12 +37,12 @@ const props = withDefaults(
 const variantClass = computed(() => {
     switch (props.variant) {
         case 'secondary':
-            return 'border-black bg-white text-black hover:bg-neutral-100 active:bg-neutral-200';
+            return 'border-black dark:border-neutral-600 bg-white dark:bg-neutral-800 text-black dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-700 active:bg-neutral-200';
         case 'danger':
-            return 'border-black bg-black text-white hover:bg-neutral-800 active:bg-neutral-900';
+            return 'border-black dark:border-neutral-600 bg-black dark:bg-white text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 active:bg-neutral-900';
         case 'primary':
         default:
-            return 'border-black bg-black text-white hover:bg-neutral-800 active:bg-neutral-900';
+            return 'border-black dark:border-neutral-600 bg-black dark:bg-white text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 active:bg-neutral-900';
     }
 });
 </script>

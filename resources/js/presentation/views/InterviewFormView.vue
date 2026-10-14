@@ -1,50 +1,51 @@
 <template>
     <div class="mx-auto max-w-3xl p-4 sm:p-6">
-        <div class="mb-4 flex items-center justify-between border-b border-black pb-4">
+        <div class="mb-4 flex items-center justify-between border-b border-black dark:border-neutral-800 pb-4">
             <div>
-                <h2 class="text-xl font-bold uppercase tracking-wide text-black">
+                <h2 class="text-xl font-bold uppercase tracking-wide text-black dark:text-white">
                     {{ isEditMode ? 'Update Survey Interview' : currentTranslation.title }}
                 </h2>
-                <p class="text-xs text-neutral-600">
+                <p class="text-xs text-neutral-600 dark:text-neutral-400">
                     {{ isEditMode ? `Editing Record: ${editReferenceId}` : currentTranslation.subtitle }}
                 </p>
             </div>
             <router-link
                 :to="{ name: 'interviews' }"
-                class="border border-black bg-white px-3 py-1.5 text-xs font-semibold text-black hover:bg-neutral-100"
+                class="border border-black dark:border-neutral-700 bg-white dark:bg-neutral-800 px-3 py-1.5 text-xs font-semibold text-black dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-700"
             >
                 {{ currentTranslation.backButton }}
             </router-link>
         </div>
 
-        <div class="mb-6 flex flex-col gap-2 border border-black bg-neutral-100 p-3 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <div class="mb-6 flex flex-col gap-2 border border-black dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 p-3 text-xs sm:flex-row sm:items-center sm:justify-between transition-colors">
             <div class="flex items-center gap-2">
-                <label for="language-selector" class="font-bold uppercase text-black">
+                <label for="language-selector" class="font-bold uppercase text-black dark:text-neutral-200">
                     {{ currentTranslation.languageLabel }}
                 </label>
                 <select
                     id="language-selector"
                     :value="currentLanguage"
-                    class="border border-black bg-white px-2 py-1 text-xs font-semibold text-black focus:outline-none"
+                    class="border border-black dark:border-neutral-700 bg-white dark:bg-neutral-800 px-2 py-1 text-xs font-semibold text-black dark:text-white focus:outline-none"
                     @change="handleLanguageChange(($event.target as HTMLSelectElement).value)"
                 >
                     <option
                         v-for="lang in SUPPORTED_LANGUAGES"
                         :key="lang.code"
                         :value="lang.code"
+                        class="bg-white dark:bg-neutral-900 text-black dark:text-white"
                     >
                         {{ lang.name }}
                     </option>
                 </select>
             </div>
-            <div class="text-[11px] text-neutral-600">
+            <div class="text-[11px] text-neutral-600 dark:text-neutral-400">
                 RCEF Multilingual Survey
             </div>
         </div>
 
         <div
             v-if="errorMessage"
-            class="mb-6 border border-black bg-neutral-200 p-4 text-xs text-black"
+            class="mb-6 border border-black dark:border-neutral-700 bg-neutral-200 dark:bg-neutral-800 p-4 text-xs text-black dark:text-white"
         >
             <p class="font-bold uppercase">
                 {{ currentTranslation.errorHeader }}
@@ -54,15 +55,15 @@
 
         <form @submit.prevent="handleSave" class="space-y-6">
             <template v-for="block in visibleBlocks" :key="block.id">
-                <section class="border border-black bg-white p-5">
-                    <div class="border-b border-neutral-300 pb-3">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+                <section class="border border-black dark:border-neutral-800 bg-white dark:bg-[#171717] p-5 transition-colors">
+                    <div class="border-b border-neutral-300 dark:border-neutral-800 pb-3">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                             {{ block.subtitle }}
                         </span>
-                        <h3 class="text-base font-bold uppercase text-black">
+                        <h3 class="text-base font-bold uppercase text-black dark:text-white">
                             {{ getBlockTitle(block) }}
                         </h3>
-                        <p class="mt-1 text-xs text-neutral-600">
+                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
                             <strong>Instructions:</strong> {{ getBlockInstructions(block) }}
                         </p>
                     </div>
@@ -74,7 +75,7 @@
                         >
                             <div
                                 :class="{
-                                    'border-l-2 border-black pl-3 ml-2': question.isConditionalChild,
+                                    'border-l-2 border-black dark:border-l-white pl-3 ml-2': question.isConditionalChild,
                                 }"
                             >
                                 <DynamicQuestionField
@@ -95,7 +96,7 @@
 
             <div
                 v-if="formData.B1Q6 === 'No'"
-                class="border border-neutral-400 bg-neutral-50 p-4 text-xs text-neutral-700"
+                class="border border-neutral-400 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 p-4 text-xs text-neutral-700 dark:text-neutral-300 transition-colors"
             >
                 <strong>Notice:</strong> {{ currentTranslation.block2_hidden_notice }}
             </div>
@@ -103,14 +104,14 @@
             <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
                 <router-link
                     :to="{ name: 'interviews' }"
-                    class="border border-black bg-white px-5 py-2.5 text-center text-sm font-semibold text-black hover:bg-neutral-100"
+                    class="border border-black dark:border-neutral-700 bg-white dark:bg-neutral-800 px-5 py-2.5 text-center text-sm font-semibold text-black dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-700"
                 >
                     {{ currentTranslation.cancelButton }}
                 </router-link>
                 <button
                     type="submit"
                     :disabled="isSubmitting"
-                    class="border border-black bg-black px-6 py-2.5 text-center text-sm font-bold uppercase tracking-wider text-white hover:bg-neutral-800 disabled:opacity-50"
+                    class="border border-black dark:border-white bg-black dark:bg-white px-6 py-2.5 text-center text-sm font-bold uppercase tracking-wider text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 disabled:opacity-50 transition-colors"
                 >
                     <span v-if="isSubmitting">
                         {{ isEditMode ? 'Updating...' : currentTranslation.savingButton }}

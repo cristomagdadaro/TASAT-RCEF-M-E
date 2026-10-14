@@ -6,13 +6,15 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import App from './presentation/App.vue';
 import router from './presentation/router';
 import { SQLiteStorageService } from './infrastructure/storage/SQLiteStorageService';
+import { useThemeStore } from './presentation/store/themeStore';
 
 async function setupStatusBar() {
     if (Capacitor.isNativePlatform()) {
         try {
+            const isLight = localStorage.getItem('theme') === 'light';
             await StatusBar.setOverlaysWebView({ overlay: false });
-            await StatusBar.setBackgroundColor({ color: '#ffffff' });
-            await StatusBar.setStyle({ style: Style.Dark });
+            await StatusBar.setBackgroundColor({ color: isLight ? '#ffffff' : '#0f0f0f' });
+            await StatusBar.setStyle({ style: isLight ? Style.Dark : Style.Light });
         } catch (e) {
             console.warn('Native status bar configuration skipped:', e);
         }
@@ -22,7 +24,6 @@ async function setupStatusBar() {
 async function bootstrap() {
     await setupStatusBar();
 
-    // Initialize SQLite persistence before UI mounting
     try {
         await SQLiteStorageService.getInstance().initialize();
     } catch (e) {
@@ -34,6 +35,9 @@ async function bootstrap() {
 
     app.use(pinia);
     app.use(router);
+
+    const themeStore = useThemeStore();
+    themeStore.initTheme();
 
     app.mount('#app');
 }
